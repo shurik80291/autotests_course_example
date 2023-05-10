@@ -18,7 +18,7 @@ def max_division_by_3(num):
     found = False
     lst_number = [number for number in str(num)]
     for index, number in enumerate(lst_number):
-        for new_number in reversed(range(int(number)+1, 10)):
+        for new_number in range(9, int(number), -1):
             sum_number += new_number - int(number)
             if sum_number % 3 == 0:
                 lst_number[index] = str(new_number)
@@ -28,15 +28,12 @@ def max_division_by_3(num):
                 sum_number -= new_number - int(number)
         if found:
             break
-    new_num = ""
-    for number in lst_number:
-        new_num += number
-    new_num = int(new_num)
-    if new_num == num:
+    new_num = int(''.join(lst_number))
+    if new_num == num:  # Если не нашли число больше исходного (например, 999 или 988)
         if new_num % 3 == 0:
-            new_num -= 3
+            new_num -= 3  # Вычитаем 3, если исходное число делится на 3 (например, 999, 888, 987 и т.д.)
         else:
-            new_num -= 1
+            new_num -= 1  # Вычитаем 1, если исходное число делится на 3 с остатком 1 (например, 988, 898, 889 и т.д.)
     return new_num
 
 # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ
